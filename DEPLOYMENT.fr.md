@@ -47,7 +47,7 @@ Les autres runtimes compatibles Fetch peuvent intégrer `shieldFetch`, mais
 exigent un routage propre à la plateforme, un en-tête IP client de confiance et
 une validation en environnement hors production.
 Les autres runtimes compatibles avec l'API Fetch peuvent appeler `shieldFetch`
-directement comme indiqué dans [README.md](README.md#other-runtimes).
+directement comme indiqué dans le [README français](README.fr.md).
 
 ## 3. Créer les secrets et la configuration
 

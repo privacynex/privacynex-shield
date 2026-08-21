@@ -1,0 +1,135 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# Node.js
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Dependencies
+node_modules/
+jspm_packages/
+.pnpm-store/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.pid.lock
+*.seed
+
+# Coverage and test output
+coverage/
+*.lcov
+.nyc_output
+
+# Cache
+.cache
+.parcel-cache
+*.tsbuildinfo
+.eslintcache
+.npm
+.node_repl_history
+.yarn-integrity
+
+# Packed artifacts
+*.tgz
+
+# NOTE: dist/ is intentionally NOT ignored.
+# The published build is committed and validated by `npm run verify:dist`.
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Secrets and environment
+# ═══════════════════════════════════════════════════════════════════════════
+
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+.envrc
+.direnv/
+!.env.example
+!.dev.vars.example
+
+# Keys and certificates
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+*.gpg
+*.asc
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Cloudflare and local dev servers
+# ═══════════════════════════════════════════════════════════════════════════
+
+.wrangler/
+wrangler.local.toml
+wrangler.local.jsonc
+.mf/
+*.local
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Local scratch work (never published)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Ad-hoc integration and end-to-end scripts kept outside the test suite
+*-e2e-test.mjs
+scratch/
+tmp/
+_local/
+*.actual
+*.new
+*.orig
+*.rej
+*.backup
+**/*.backup.*
+**/*.back.*
+archive*
+
+# ═══════════════════════════════════════════════════════════════════════════
+# IDEs and editors
+# ═══════════════════════════════════════════════════════════════════════════
+
+.vscode/
+.vscode-test
+.idea/
+*.iml
+*.iws
+*.ipr
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# ═══════════════════════════════════════════════════════════════════════════
+# OS-specific
+# ═══════════════════════════════════════════════════════════════════════════
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory

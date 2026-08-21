@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacynex Shield: Example</title>
+
+  <script>
+    window.PNX_SHIELD = {
+      workerPath: '../dist/pow-worker.js',
+      brandName:  'Example Site'
+    };
+  </script>
+  <script src="../dist/shield.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #090909; color: #ccc;
+      min-height: 100vh; display: grid; place-items: center;
+      padding: 2rem;
+    }
+    html[data-theme="light"] body { background: #fafafa; color: #333; }
+    .content { text-align: center; max-width: 30rem; }
+    h1 { font-size: 1.5rem; margin-bottom: .5rem; color: #f0f0f0; }
+    html[data-theme="light"] h1 { color: #1a1a1a; }
+    p { font-size: .85rem; line-height: 1.6; color: #888; margin-bottom: 1rem; }
+    .badge {
+      display: inline-block; background: #2ec4b6; color: #000;
+      padding: .3rem .8rem; border-radius: 4px;
+      font-size: .7rem; font-weight: 700;
+    }
+    .package-meta {
+      display: grid; grid-template-columns: auto auto; justify-content: center;
+      gap: .25rem .75rem; margin: 1rem 0; font-size: .75rem;
+    }
+    .package-meta dt { color: #666; text-align: right; }
+    .package-meta dd { color: #aaa; text-align: left; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+    button {
+      margin-top: 1rem; padding: .5rem 1rem; border: 1px solid #333;
+      background: #0f0f0f; color: #ccc; border-radius: 4px;
+      cursor: pointer; font-size: .8rem;
+    }
+    html[data-theme="light"] button { background: #fff; border-color: #ddd; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Protected Page</h1>
+    <p>If you see this content, you passed the Privacynex Shield challenge. The PoW was solved automatically by your browser.</p>
+    <div class="badge">SHIELD OK</div>
+    <dl class="package-meta" aria-label="Package metadata">
+      <dt>Package</dt><dd id="package-name">Loading</dd>
+      <dt>Version</dt><dd id="package-version">Loading</dd>
+      <dt>Author</dt><dd id="package-author">Loading</dd>
+      <dt>License</dt><dd id="package-license">Loading</dd>
+    </dl>
+    <form class="actions" method="post" action="/api/shield-demo-reset">
+      <button type="submit">Run Shield again</button>
+      <button id="toggle-theme" type="button">Toggle theme</button>
+    </form>
+  </div>
+  <script>
+    (async function loadPackageMetadata() {
+      try {
+        var response = await fetch('../package.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('package metadata unavailable');
+        var metadata = await response.json();
+        document.getElementById('package-name').textContent = metadata.name;
+        document.getElementById('package-version').textContent = 'v' + metadata.version;
+        document.getElementById('package-author').textContent =
+          typeof metadata.author === 'string' ? metadata.author : metadata.author.name;
+        document.getElementById('package-license').textContent = metadata.license;
+      } catch (error) {
+        document.getElementById('package-name').textContent = 'privacynex-shield';
+        document.getElementById('package-version').textContent = 'Unavailable';
+        document.getElementById('package-author').textContent = 'Slym B.';
+        document.getElementById('package-license').textContent = 'MIT';
+      }
+    }());
+
+    document.getElementById('toggle-theme').addEventListener('click', function() {
+      document.documentElement.setAttribute(
+        'data-theme',
+        document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'
+      );
+    });
+
+    document.querySelector('.actions').addEventListener('submit', function() {
+      try {
+        sessionStorage.removeItem('pnx_shield_loop_guard');
+        sessionStorage.removeItem('pnx_shield_last_reload');
+      } catch (error) {}
+    });
+
+  </script>
+</body>
+</html>

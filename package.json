@@ -1,0 +1,88 @@
+{
+  "name": "privacynex-shield",
+  "version": "1.0.0",
+  "description": "Server-verified proof-of-work gate for any Fetch API runtime.",
+  "author": "Slym B.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "keywords": [
+    "proof-of-work",
+    "bot-detection",
+    "anti-scraping",
+    "security",
+    "cloudflare-pages",
+    "cloudflare-workers",
+    "edge-functions",
+    "hmac",
+    "rate-limit"
+  ],
+  "files": [
+    "assets/",
+    "bin/",
+    "dist/",
+    "example/",
+    "src/",
+    "server/",
+    "README.md",
+    "README.fr.md",
+    "CHANGELOG.md",
+    "CHANGELOG.fr.md",
+    "CONTRIBUTING.md",
+    "DEPLOYMENT.md",
+    "DEPLOYMENT.fr.md",
+    "SECURITY.md",
+    "TRADEMARKS.md",
+    "VERSIONING.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "bin": {
+    "privacynex-shield": "bin/pnx-shield.mjs",
+    "pnx-shield": "bin/pnx-shield.mjs"
+  },
+  "exports": {
+    "./runtime": "./dist/lib/config/runtime.js",
+    "./core": "./dist/lib/core/crypto.js",
+    "./decision": "./dist/lib/decision/engine.js",
+    "./bot-policy": "./dist/lib/detection/bot-policy.js",
+    "./coherence": "./dist/lib/detection/coherence.js",
+    "./internal-api": "./dist/lib/http/internal-api.js",
+    "./middleware": "./dist/lib/pipeline/shield.js",
+    "./rate-limit": "./dist/lib/pipeline/ratelimit.js",
+    "./request": "./dist/lib/pipeline/request.js",
+    "./challenge": "./dist/lib/pow/challenge.js",
+    "./verify": "./dist/lib/pow/verify.js",
+    "./score": "./dist/lib/scoring/score.js",
+    "./client": "./dist/shield.js",
+    "./worker": "./dist/pow-worker.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "version:check": "node scripts/verify-version.mjs",
+    "verify:dist": "node scripts/verify-dist.mjs",
+    "check": "npm run build && npm run typecheck && npm test && npm run version:check && npm run verify:dist",
+    "refresh:crawlers": "node scripts/refresh-bot-ips.mjs",
+    "prepack": "npm run check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/privacynex/privacynex-shield.git"
+  },
+  "bugs": {
+    "url": "https://github.com/privacynex/privacynex-shield/issues"
+  },
+  "homepage": "https://github.com/privacynex/privacynex-shield#readme",
+  "funding": "https://github.com/sponsors/slymb",
+  "publishConfig": {
+    "access": "public"
+  }
+}
